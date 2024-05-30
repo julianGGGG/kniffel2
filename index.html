@@ -718,16 +718,40 @@
         // Function to toggle visibility of elements and exclude from calculation
         function toggleVisibilityAndCalculation(checkbox, element) {
     checkbox.addEventListener('change', function() {
+        const targetElement = element.parentNode.querySelector('select, input[type="checkbox"]');
         if (this.checked) {
-            element.parentNode.style.display = 'none';
-            element.dataset.ignore = 'true';
+            targetElement.style.display = 'none';
+            targetElement.dataset.ignore = 'true';
         } else {
-            element.parentNode.style.display = 'block';
-            element.dataset.ignore = 'false';
+            targetElement.style.display = 'block';
+            targetElement.dataset.ignore = 'false';
         }
         calculateTotals();
     });
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    const rows = [
+        'fullhouse', 'kleinestr', 'grossestr', 'kniffel'
+    ];
+    rows.forEach(row => {
+        const liaCheckbox = document.getElementById(`lia-${row}-hide`);
+        const julianCheckbox = document.getElementById(`julian-${row}-hide`);
+        const liaElement = document.getElementById(`lia-${row}`);
+        const julianElement = document.getElementById(`julian-${row}`);
+        if (liaCheckbox && liaElement) {
+            toggleVisibilityAndCalculation(liaCheckbox, liaElement);
+        }
+        if (julianCheckbox && julianElement) {
+            toggleVisibilityAndCalculation(julianCheckbox, julianElement);
+        }
+    });
+
+    calculateTotals();
+
+    document.addEventListener('input', calculateTotals);
+});
+
 
 
         // Function to calculate totals
