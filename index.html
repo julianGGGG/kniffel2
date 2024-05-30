@@ -14,26 +14,22 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 1em;
+            font-size: 0.7em;
         }
         th, td {
             border: 1px solid #000;
             text-align: center;
             padding: 2px;
             width: 33.33%;
-            vertical-align: middle;
-            font-weight: bold;
         }
         .category {
             text-align: left;
-            font-size: 1.2em;
+            font-size: 0.8em;
             text-transform: capitalize;
-            padding-left: 5px;
         }
         input[type=number], select, input[type=text], input[type=checkbox] {
             box-sizing: border-box;
-            font-size: 1em;
-            margin: 0 2px;
+            font-size: 0.8em;
         }
         .switch {
             position: relative;
@@ -101,7 +97,7 @@
                 text-align: left;
             }
             .category {
-                flex: 2;
+                flex: 1;
                 font-weight: bold;
             }
             .checkbox-wrapper {
@@ -112,19 +108,8 @@
             select, input[type=number] {
                 flex: 1;
             }
-            td span {
-                text-align: center;
-                display: block;
-                width: 100%;
-                font-weight: bold;
-            }
-            td {
-                margin: 0 2px;
-            }
         }
     </style>
-    <link rel="apple-touch-icon" href="icon.png">
-    <link rel="manifest" href="manifest.json">
 </head>
 <body>
     <table>
@@ -760,17 +745,6 @@
             // Recalculate totals on input change
             document.addEventListener('input', calculateTotals);
         });
-
-        // Add service worker for PWA
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/service-worker.js')
-                .then(function(registration) {
-                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
-                })
-                .catch(function(error) {
-                    console.log('ServiceWorker registration failed: ', error);
-                });
-        }
     </script>
 </body>
 </html>
