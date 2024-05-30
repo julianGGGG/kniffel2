@@ -32,6 +32,10 @@
             box-sizing: border-box;
             font-size: 0.9em;
         }
+        select {
+            text-align: center;
+            text-align-last: center; /* For Firefox */
+        }
         .result {
             font-weight: bold;
             text-align: center;
@@ -124,19 +128,18 @@
     <table>
         <tbody>
             <tr>
-    <td></td>
-    <td>
-        <div class="checkbox-wrapper">
-            <input type="text" id="player1-name" value="Spieler 1" class="result" style="width: 100%; box-sizing: border-box;">
-        </div>
-    </td>
-    <td>
-        <div class="checkbox-wrapper">
-            <input type="text" id="player2-name" value="Spieler 2" class="result" style="width: 100%; box-sizing: border-box;">
-        </div>
-    </td>
-</tr>
-
+                <td></td>
+                <td>
+                    <div class="checkbox-wrapper">
+                        <input type="text" id="player1-name" value="Spieler 1" class="result" style="width: 100%; box-sizing: border-box;">
+                    </div>
+                </td>
+                <td>
+                    <div class="checkbox-wrapper">
+                        <input type="text" id="player2-name" value="Spieler 2" class="result" style="width: 100%; box-sizing: border-box;">
+                    </div>
+                </td>
+            </tr>
             <tr>
                 <td class="category">1er</td>
                 <td>
@@ -521,90 +524,89 @@
                 </td>
             </tr>
            <tr>
-    <td class="category">Full House</td>
-    <td>
-        <div class="checkbox-wrapper">
-            <input type="checkbox" id="lia-fullhouse-hide">
-            <label class="switch" style="margin: 0 auto;">
-                <input type="checkbox" id="lia-fullhouse" name="lia-fullhouse" value="25">
-                <span class="slider round"></span>
-            </label>
-        </div>
-    </td>
-    <td>
-        <div class="checkbox-wrapper">
-            <input type="checkbox" id="julian-fullhouse-hide">
-            <label class="switch" style="margin: 0 auto;">
-                <input type="checkbox" id="julian-fullhouse" name="julian-fullhouse" value="25">
-                <span class="slider round"></span>
-            </label>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td class="category">Kl. Straße</td>
-    <td>
-        <div class="checkbox-wrapper">
-            <input type="checkbox" id="lia-kleinestr-hide">
-            <label class="switch" style="margin: 0 auto;">
-                <input type="checkbox" id="lia-kleinestr" name="lia-kleinestr" value="30">
-                <span class="slider round"></span>
-            </label>
-        </div>
-    </td>
-    <td>
-        <div class="checkbox-wrapper">
-            <input type="checkbox" id="julian-kleinestr-hide">
-            <label class="switch" style="margin: 0 auto;">
-                <input type="checkbox" id="julian-kleinestr" name="julian-kleinestr" value="30">
-                <span class="slider round"></span>
-            </label>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td class="category">Gr. Straße</td>
-    <td>
-        <div class="checkbox-wrapper">
-            <input type="checkbox" id="lia-grossestr-hide">
-            <label class="switch" style="margin: 0 auto;">
-                <input type="checkbox" id="lia-grossestr" name="lia-grossestr" value="40">
-                <span class="slider round"></span>
-            </label>
-        </div>
-    </td>
-    <td>
-        <div class="checkbox-wrapper">
-            <input type="checkbox" id="julian-grossestr-hide">
-            <label class="switch" style="margin: 0 auto;">
-                <input type="checkbox" id="julian-grossestr" name="julian-grossestr" value="40">
-                <span class="slider round"></span>
-            </label>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td class="category">Kniffel</td>
-    <td>
-        <div class="checkbox-wrapper">
-            <input type="checkbox" id="lia-kniffel-hide">
-            <label class="switch" style="margin: 0 auto;">
-                <input type="checkbox" id="lia-kniffel" name="lia-kniffel" value="50">
-                <span class="slider round"></span>
-            </label>
-        </div>
-    </td>
-    <td>
-        <div class="checkbox-wrapper">
-            <input type="checkbox" id="julian-kniffel-hide">
-            <label class="switch" style="margin: 0 auto;">
-                <input type="checkbox" id="julian-kniffel" name="julian-kniffel" value="50">
-                <span class="slider round"></span>
-            </label>
-        </div>
-    </td>
-</tr>
-
+                <td class="category">Full House</td>
+                <td>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="lia-fullhouse-hide">
+                        <label class="switch" style="margin: 0 auto;">
+                            <input type="checkbox" id="lia-fullhouse" name="lia-fullhouse" value="25">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </td>
+                <td>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="julian-fullhouse-hide">
+                        <label class="switch" style="margin: 0 auto;">
+                            <input type="checkbox" id="julian-fullhouse" name="julian-fullhouse" value="25">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="category">Kl. Straße</td>
+                <td>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="lia-kleinestr-hide">
+                        <label class="switch" style="margin: 0 auto;">
+                            <input type="checkbox" id="lia-kleinestr" name="lia-kleinestr" value="30">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </td>
+                <td>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="julian-kleinestr-hide">
+                        <label class="switch" style="margin: 0 auto;">
+                            <input type="checkbox" id="julian-kleinestr" name="julian-kleinestr" value="30">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="category">Gr. Straße</td>
+                <td>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="lia-grossestr-hide">
+                        <label class="switch" style="margin: 0 auto;">
+                            <input type="checkbox" id="lia-grossestr" name="lia-grossestr" value="40">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </td>
+                <td>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="julian-grossestr-hide">
+                        <label class="switch" style="margin: 0 auto;">
+                            <input type="checkbox" id="julian-grossestr" name="julian-grossestr" value="40">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="category">Kniffel</td>
+                <td>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="lia-kniffel-hide">
+                        <label class="switch" style="margin: 0 auto;">
+                            <input type="checkbox" id="lia-kniffel" name="lia-kniffel" value="50">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </td>
+                <td>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="julian-kniffel-hide">
+                        <label class="switch" style="margin: 0 auto;">
+                            <input type="checkbox" id="julian-kniffel" name="julian-kniffel" value="50">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </td>
+            </tr>
             <tr>
                 <td class="category">Chance</td>
                 <td>
