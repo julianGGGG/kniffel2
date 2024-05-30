@@ -10,11 +10,12 @@
             padding: 5px;
             margin: 0;
             box-sizing: border-box;
+            font-size: 0.9em;
+            overflow: hidden; /* Verhindert das Scrollen */
         }
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.9em;
         }
         th, td {
             border: 1px solid #000;
@@ -30,6 +31,10 @@
         input[type=number], select, input[type=text], input[type=checkbox] {
             box-sizing: border-box;
             font-size: 0.9em;
+        }
+        .result {
+            font-weight: bold;
+            text-align: center;
         }
         .switch {
             position: relative;
@@ -108,6 +113,10 @@
             select, input[type=number] {
                 flex: 1;
             }
+            .result, input[type=text] {
+                text-align: center;
+                font-weight: bold;
+            }
         }
     </style>
 </head>
@@ -116,8 +125,8 @@
         <tbody>
             <tr>
                 <td></td>
-                <td><input type="text" id="player1-name" value="Spieler 1"></td>
-                <td><input type="text" id="player2-name" value="Spieler 2"></td>
+                <td><input type="text" id="player1-name" value="Spieler 1" class="result"></td>
+                <td><input type="text" id="player2-name" value="Spieler 2" class="result"></td>
             </tr>
             <tr>
                 <td class="category">1er</td>
@@ -307,18 +316,18 @@
             </tr>
             <tr>
                 <td class="category">Gesamt</td>
-                <td><span id="lia-gesamt">0</span></td>
-                <td><span id="julian-gesamt">0</span></td>
+                <td class="result"><span id="lia-gesamt">0</span></td>
+                <td class="result"><span id="julian-gesamt">0</span></td>
             </tr>
             <tr>
                 <td class="category">Bonus</td>
-                <td><span id="lia-bonus">0</span></td>
-                <td><span id="julian-bonus">0</span></td>
+                <td class="result"><span id="lia-bonus">0</span></td>
+                <td class="result"><span id="julian-bonus">0</span></td>
             </tr>
             <tr>
                 <td class="category">Gesamt Oben</td>
-                <td><span id="lia-gesamt-oben">0</span></td>
-                <td><span id="julian-gesamt-oben">0</span></td>
+                <td class="result"><span id="lia-gesamt-oben">0</span></td>
+                <td class="result"><span id="julian-gesamt-oben">0</span></td>
             </tr>
             <tr>
                 <td class="category">Dreierpasch</td>
@@ -326,6 +335,12 @@
                     <div class="checkbox-wrapper">
                         <input type="checkbox" id="lia-dreierpasch-hide">
                         <select id="lia-dreierpasch">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
                             <option value="6">6</option>
                             <option value="7">7</option>
                             <option value="8">8</option>
@@ -364,6 +379,12 @@
                     <div class="checkbox-wrapper">
                         <input type="checkbox" id="julian-dreierpasch-hide">
                         <select id="julian-dreierpasch">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
                             <option value="6">6</option>
                             <option value="7">7</option>
                             <option value="8">8</option>
@@ -405,6 +426,12 @@
                     <div class="checkbox-wrapper">
                         <input type="checkbox" id="lia-viererpasch-hide">
                         <select id="lia-viererpasch">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
                             <option value="6">6</option>
                             <option value="7">7</option>
                             <option value="8">8</option>
@@ -443,6 +470,12 @@
                     <div class="checkbox-wrapper">
                         <input type="checkbox" id="julian-viererpasch-hide">
                         <select id="julian-viererpasch">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
                             <option value="6">6</option>
                             <option value="7">7</option>
                             <option value="8">8</option>
@@ -568,6 +601,12 @@
                     <div class="checkbox-wrapper">
                         <input type="checkbox" id="lia-chance-hide">
                         <select id="lia-chance">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
                             <option value="6">6</option>
                             <option value="7">7</option>
                             <option value="8">8</option>
@@ -606,6 +645,12 @@
                     <div class="checkbox-wrapper">
                         <input type="checkbox" id="julian-chance-hide">
                         <select id="julian-chance">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
                             <option value="6">6</option>
                             <option value="7">7</option>
                             <option value="8">8</option>
@@ -643,18 +688,18 @@
             </tr>
             <tr>
                 <td class="category">Gesamt Unten</td>
-                <td><span id="lia-gesamt-unten">0</span></td>
-                <td><span id="julian-gesamt-unten">0</span></td>
+                <td class="result"><span id="lia-gesamt-unten">0</span></td>
+                <td class="result"><span id="julian-gesamt-unten">0</span></td>
             </tr>
             <tr>
                 <td class="category">Gesamt Oben</td>
-                <td><span id="lia-gesamt-oben-2">0</span></td>
-                <td><span id="julian-gesamt-oben-2">0</span></td>
+                <td class="result"><span id="lia-gesamt-oben-2">0</span></td>
+                <td class="result"><span id="julian-gesamt-oben-2">0</span></td>
             </tr>
             <tr>
                 <td class="category">Endsumme</td>
-                <td><span id="lia-endsumme">0</span></td>
-                <td><span id="julian-endsumme">0</span></td>
+                <td class="result"><span id="lia-endsumme">0</span></td>
+                <td class="result"><span id="julian-endsumme">0</span></td>
             </tr>
         </tbody>
     </table>
