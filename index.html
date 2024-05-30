@@ -21,7 +21,7 @@
             border: 1px solid #000;
             text-align: center;
             padding: 2px;
-            width: 33.33%;
+            width: auto;
         }
         .category {
             text-align: left;
@@ -125,97 +125,164 @@
     </style>
 </head>
 <body>
-    <table>
+    <table id="score-table">
         <tbody>
             <tr>
                 <td>
-                    <input type="number" id="number-of-players" placeholder="Anzahl Spieler" min="1" max="10" value="2" style="width: 100%; box-sizing: border-box;">
+                    <input type="number" id="player-count" min="1" max="10" value="2" style="width: 100%; box-sizing: border-box;">
                 </td>
-                <td>
+                <td id="player1-name-cell">
                     <div class="checkbox-wrapper">
                         <input type="text" id="player1-name" value="Spieler 1" class="result" style="width: 100%; box-sizing: border-box;">
                     </div>
                 </td>
-                <td>
+                <td id="player2-name-cell">
                     <div class="checkbox-wrapper">
                         <input type="text" id="player2-name" value="Spieler 2" class="result" style="width: 100%; box-sizing: border-box;">
                     </div>
                 </td>
             </tr>
-            <tr id="player-rows">
-                <td class="category">1er</td>
-                <td>
-                    <div class="checkbox-wrapper">
-                        <input type="checkbox" id="player1-1er-hide">
-                        <select id="player1-1er">
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                        </select>
-                    </div>
-                </td>
-                <td>
-                    <div class="checkbox-wrapper">
-                        <input type="checkbox" id="player2-1er-hide">
-                        <select id="player2-1er">
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                        </select>
-                    </div>
-                </td>
-            </tr>
-            <!-- Weitere Zeilen für Kategorien hier -->
-            <tr>
-                <td class="category">Gesamt</td>
-                <td class="result"><span id="player1-gesamt">0</span></td>
-                <td class="result"><span id="player2-gesamt">0</span></td>
-            </tr>
-            <!-- Weitere Zeilen für Bonus, Gesamt Oben, etc. -->
+            <!-- The rest of the table rows will be dynamically generated based on the player count -->
         </tbody>
     </table>
     <script>
-        function createPlayerColumns(numPlayers) {
-            const playerRows = document.getElementById('player-rows');
-            playerRows.innerHTML = ''; // Lösche alle vorhandenen Spieler-Spalten
+        document.addEventListener('DOMContentLoaded', function() {
+            const playerCountInput = document.getElementById('player-count');
+            const table = document.getElementById('score-table');
 
-            for (let i = 1; i <= numPlayers; i++) {
-                const playerColumn = document.createElement('td');
-                playerColumn.innerHTML = `
-                    <div class="checkbox-wrapper">
-                        <input type="checkbox" id="player${i}-1er-hide">
-                        <select id="player${i}-1er">
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                        </select>
-                    </div>
-                `;
-                playerRows.appendChild(playerColumn);
+            function createPlayerColumn(playerNumber) {
+                return `
+                    <td id="player${playerNumber}-name-cell">
+                        <div class="checkbox-wrapper">
+                            <input type="text" id="player${playerNumber}-name" value="Spieler ${playerNumber}" class="result" style="width: 100%; box-sizing: border-box;">
+                        </div>
+                    </td>`;
             }
-        }
 
-        document.getElementById('number-of-players').addEventListener('input', function () {
-            const numPlayers = parseInt(this.value);
-            if (numPlayers >= 1 && numPlayers <= 10) {
-                createPlayerColumns(numPlayers);
+            function updateTable() {
+                const playerCount = parseInt(playerCountInput.value, 10);
+                const headerRow = table.rows[0];
+                
+                // Remove all player columns
+                while (headerRow.cells.length > 1) {
+                    headerRow.deleteCell(1);
+                }
+                
+                // Add the required number of player columns
+                for (let i = 1; i <= playerCount; i++) {
+                    headerRow.insertAdjacentHTML('beforeend', createPlayerColumn(i));
+                }
+
+                // Adjust table width for mobile view
+                if (playerCount > 4) {
+                    table.style.width = 'auto';
+                } else {
+                    table.style.width = '100%';
+                }
+
+                // Re-generate all other rows (except header)
+                const categories = [
+                    '1er', '2er', '3er', '4er', '5er', '6er',
+                    'dreierpasch', 'viererpasch', 'fullhouse', 'kleinestr', 
+                    'grossestr', 'kniffel', 'chance'
+                ];
+                
+                // Clear existing rows
+                while (table.rows.length > 1) {
+                    table.deleteRow(1);
+                }
+
+                // Add rows for each category
+                categories.forEach(category => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `<td class="category">${category}</td>`;
+                    for (let i = 1; i <= playerCount; i++) {
+                        row.insertAdjacentHTML('beforeend', `
+                            <td>
+                                <div class="checkbox-wrapper">
+                                    <input type="checkbox" id="player${i}-${category}-hide">
+                                    <select id="player${i}-${category}">
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                    </select>
+                                </div>
+                            </td>
+                        `);
+                    }
+                    table.tBodies[0].appendChild(row);
+                });
+
+                calculateTotals();
             }
+
+            // Function to toggle visibility of elements and exclude from calculation
+            function toggleVisibilityAndCalculation(checkbox, element) {
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        element.style.display = 'none';
+                        element.dataset.ignore = 'true';
+                    } else {
+                        element.style.display = 'block';
+                        element.dataset.ignore = 'false';
+                    }
+                    calculateTotals();
+                });
+            }
+
+            // Function to calculate totals
+            function calculateTotals() {
+                const playerCount = parseInt(playerCountInput.value, 10);
+                const players = Array.from({ length: playerCount }, (_, i) => `player${i + 1}`);
+                const upperCategories = ['1er', '2er', '3er', '4er', '5er', '6er'];
+                const lowerCategories = ['dreierpasch', 'viererpasch', 'fullhouse', 'kleinestr', 'grossestr', 'kniffel', 'chance'];
+                const upperSectionBonus = 63;
+                const upperSectionBonusPoints = 35;
+
+                players.forEach(player => {
+                    let upperTotal = 0;
+                    let lowerTotal = 0;
+
+                    // Calculate upper section total
+                    upperCategories.forEach(category => {
+                        const element = document.getElementById(`${player}-${category}`);
+                        if (element.dataset.ignore !== 'true') {
+                            upperTotal += Number(element.value) || 0;
+                        }
+                    });
+
+                    // Calculate bonus
+                    let bonus = upperTotal >= upperSectionBonus ? upperSectionBonusPoints : 0;
+                    document.getElementById(`${player}-bonus`).textContent = bonus;
+                    document.getElementById(`${player}-gesamt-oben`).textContent = upperTotal + bonus;
+
+                    // Calculate lower section total
+                    lowerCategories.forEach(category => {
+                        const element = document.getElementById(`${player}-${category}`);
+                        if (element && element.dataset.ignore !== 'true') {
+                            if (category === 'fullhouse' || category === 'kleinestr' || category === 'grossestr' || category === 'kniffel') {
+                                lowerTotal += element.checked ? Number(element.value) : 0;
+                            } else {
+                                lowerTotal += Number(element.value) || 0;
+                            }
+                        }
+                    });
+
+                    // Set totals
+                    document.getElementById(`${player}-gesamt`).textContent = upperTotal;
+                    document.getElementById(`${player}-gesamt-unten`).textContent = lowerTotal;
+                    document.getElementById(`${player}-gesamt-oben-2`).textContent = upperTotal + bonus;
+                    document.getElementById(`${player}-endsumme`).textContent = upperTotal + bonus + lowerTotal;
+                });
+            }
+
+            playerCountInput.addEventListener('change', updateTable);
+            updateTable();
         });
-
-        // Initiale Erstellung der Spieler-Spalten
-        createPlayerColumns(2);
     </script>
 </body>
 </html>
