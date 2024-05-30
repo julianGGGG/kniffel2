@@ -926,46 +926,18 @@
     </table>
     <script>
         // Function to toggle visibility of elements and exclude from calculation
-        function toggleVisibilityAndCalculation(checkbox, element) {
+       function toggleVisibilityAndCalculation(checkbox, element) {
     checkbox.addEventListener('change', function() {
         if (this.checked) {
-            element.style.display = 'none';
+            element.parentNode.style.display = 'none';
             element.dataset.ignore = 'true';
         } else {
-            element.style.display = 'block';
+            element.parentNode.style.display = 'block';
             element.dataset.ignore = 'false';
         }
         calculateTotals();
     });
 }
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Add toggle visibility and calculation functionality for each row
-    const rows = [
-        '1er', '2er', '3er', '4er', '5er', '6er', 
-        'dreierpasch', 'viererpasch', 'fullhouse', 'kleinestr', 
-        'grossestr', 'kniffel', 'chance', 'gesamt-unten', 
-        'gesamt-oben-2', 'endsumme'
-    ];
-    rows.forEach(row => {
-        const liaCheckbox = document.getElementById(`lia-${row}-hide`);
-        const julianCheckbox = document.getElementById(`julian-${row}-hide`);
-        const liaElement = document.getElementById(`lia-${row}`);
-        const julianElement = document.getElementById(`julian-${row}`);
-        if (liaCheckbox && liaElement) {
-            toggleVisibilityAndCalculation(liaCheckbox, liaElement);
-        }
-        if (julianCheckbox && julianElement) {
-            toggleVisibilityAndCalculation(julianCheckbox, julianElement);
-        }
-    });
-
-    // Calculate totals initially
-    calculateTotals();
-
-    // Recalculate totals on input change
-    document.addEventListener('input', calculateTotals);
-});
 
 
 
