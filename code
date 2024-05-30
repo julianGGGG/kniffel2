@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kniffel Score Sheet</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 5px;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.7em;
+        }
+        th, td {
+            border: 1px solid #000;
+            text-align: center;
+            padding: 2px;
+            width: 33.33%;
+        }
+        .category {
+            text-align: left;
+            font-size: 0.8em;
+            text-transform: capitalize;
+        }
+        input[type=number], select, input[type=text], input[type=checkbox] {
+            box-sizing: border-box;
+            font-size: 0.8em;
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 34px;
+            height: 20px;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 12px;
+            width: 12px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+        }
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+        input:checked + .slider:before {
+            transform: translateX(14px);
+        }
+        .slider.round {
+            border-radius: 34px;
+        }
+        .slider.round:before {
+            border-radius: 50%;
+        }
+        @media (max-width: 600px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+            thead tr {
+                display: none;
+            }
+            tr {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                margin-bottom: 0;
+                border: 1px solid #000;
+                padding: 2px;
+                background-color: #f9f9f9;
+            }
+            td {
+                border: none;
+                flex: 1;
+                padding: 2px;
+                text-align: left;
+            }
+            .category {
+                flex: 1;
+                font-weight: bold;
+            }
+            .checkbox-wrapper {
+                display: flex;
+                align-items: center;
+                flex: 1;
+            }
+            select, input[type=number] {
+                flex: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tbody>
+            <tr>
+                <td></td>
+                <td><input type="text" id="player1-name" value="Spieler 1"></td>
+                <td><input type="text" id="player2-name" value="Spieler 2"></td>
+            </tr>
+            <tr>
+                <td class="category">1er</td>
+                <td>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="lia-1er-hide">
+                        <select id="lia-1er">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select>
+                    </div>
+                </td>
+                <td>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="julian-1er-hide">
+                        <select id="julian-1er">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="category">2er</td>
+                <td>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="lia-2er-hide">
+                        <select id="lia-2er">
+                            <option value="0">0</option>
+                            <option value="2">2</option>
+                            <option value="4">4</option>
+                            <option value="6">6</option>
+                            <option value="8">8</option>
+                            <option value="10">10</option>
+                            <option value="12">12</option>
+                        </select>
+                    </div>
+                </td>
+                <td>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="julian-2er-hide">
+                        <select id="julian-2er">
+                            <option value="0">0</option>
+                            <option value="2">2</option>
+                            <option value="4">4</option>
+                            <option value="6">6</option>
+                            <option value="8">8</option>
+                            <option value="10">10</option>
+                            <option value="12">12</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="category">3er</td>
+                <td>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="lia-3er-hide">
+                        <select id="lia-3er">
+                            <option value="0">0</option>
+                            <option value="3">3</option>
+                            <option value="6">6</option>
+                            <option value="9">9</option>
+                            <option value="12">12</option>
+                            <option value="15">15</option>
+                            <option value="18">18</option>
+                        </select>
+                    </div>
+                </td>
+                <td>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="julian-3er-hide">
+                        <select id="julian-3er">
+                            <option value="0">0</option>
+                            <option value="3">3</option>
+                            <option value="6">6</option>
+                            <option value="9">9</option>
+                            <option value="12">12</option>
+                            <option value="15">15</option>
+                            <option value="18">18</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="category">4er</td>
+                <td>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="lia-4er-hide">
+                        <select id="lia-4er">
+                            <option value="0">0</option>
+                            <option value="4">4</option>
+                            <option value="8">8</option>
+                            <option value="12">12</option>
+                            <option value="16">16</option>
+                            <option value="20">20</option>
+                            <option value="24">24</option>
+                        </select>
+                    </div>
+                </td>
+                <td>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="julian-4er-hide">
+                        <select id="julian-4er">
+                            <option value="0">0</option>
+                            <option value="4">4</option>
+                            <option value="8">8</option>
+                            <option value="12">12</option>
+                            <option value="16">16</option>
+                            <option value="20">20</option>
+                            <option value="24">24</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="category">5er</td>
+                <td>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="lia-5er-hide">
+                        <select id="lia-5er">
+                            <option value="0">0</option>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                            <option value="25">25</option>
+                            <option value="30">30</option>
+                        </select>
+                    </div>
+                </td>
+                <td>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="julian-5er-hide">
+                        <select id="julian-5er">
+                            <option value="0">0</option>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                            <option value="25">25</option>
+                            <option value="30">30</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="category">6er</td>
+                <td>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="lia-6er-hide">
+                        <select id="lia-6er">
+                            <option value="0">0</option>
+                            <option value="6">6</option>
+                            <option value="12">12</option>
+                            <option value="18">18</option>
+                            <option value="24">24</option>
+                            <option value="30">30</option>
+                            <option value="36">36</option>
+                        </select>
+                    </div>
+                </td>
+                <td>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="julian-6er-hide">
+                        <select id="julian-6er">
+                            <option value="0">0</option>
+                            <option value="6">6</option>
+                            <option value="12">12</option>
+                            <option value="18">18</option>
+                            <option value="24">24</option>
+                            <option value="30">30</option>
+                            <option value="36">36</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="category">Gesamt</td>
+                <td><span id="lia-gesamt">0</span></td>
+                <td><span id="julian-gesamt">0</span></td>
+            </tr>
+            <tr>
+                <td class="category">Bonus</td>
+                <td><span id="lia-bonus">0</span></td>
+                <td><span id="julian-bonus">0</span></td>
+            </tr>
+            <tr>
+                <td class="category">Gesamt Oben</td>
+                <td><span id="lia-gesamt-oben">0</span></td>
+                <td><span id="julian-gesamt-oben">0</span></td>
+            </tr>
+            <tr>
+                <td class="category">Dreierpasch</td>
+                <td>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="lia-dreierpasch-hide">
+                        <select id="lia-dreierpasch">
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                            <option value="31">31</option>
+                            <option value="32">32</option>
+                            <option value="33">33</option>
+                            <option value="34">34</option>
+                            <option value="35">35</option>
+                            <option value="36">36</option>
+                        </select>
+                    </div>
+                </td>
+                <td>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="julian-dreierpasch-hide">
+                        <select id="julian-dreierpasch">
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                            <option value="31">31</option>
+                            <option value="32">32</option>
+                            <option value="33">33</option>
+                            <option value="34">34</option>
+                            <option value="35">35</option>
+                            <option value="36">36</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="category">Viererpasch</td>
+                <td>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="lia-viererpasch-hide">
+                        <select id="lia-viererpasch">
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                            <option value="31">31</option>
+                            <option value="32">32</option>
+                            <option value="33">33</option>
+                            <option value="34">34</option>
+                            <option value="35">35</option>
+                            <option value="36">36</option>
+                        </select>
+                    </div>
+                </td>
+                <td>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="julian-viererpasch-hide">
+                        <select id="julian-viererpasch">
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                            <option value="31">31</option>
+                            <option value="32">32</option>
+                            <option value="33">33</option>
+                            <option value="34">34</option>
+                            <option value="35">35</option>
+                            <option value="36">36</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="category">Full House</td>
+                <td>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="lia-fullhouse-hide">
+                        <label class="switch">
+                            <input type="checkbox" id="lia-fullhouse" name="lia-fullhouse" value="25">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </td>
+                <td>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="julian-fullhouse-hide">
+                        <label class="switch">
+                            <input type="checkbox" id="julian-fullhouse" name="julian-fullhouse" value="25">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="category">Kl. Straße</td>
+                <td>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="lia-kleinestr-hide">
+                        <label class="switch">
+                            <input type="checkbox" id="lia-kleinestr" name="lia-kleinestr" value="30">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </td>
+                <td>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="julian-kleinestr-hide">
+                        <label class="switch">
+                            <input type="checkbox" id="julian-kleinestr" name="julian-kleinestr" value="30">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="category">Gr. Straße</td>
+                <td>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="lia-grossestr-hide">
+                        <label class="switch">
+                            <input type="checkbox" id="lia-grossestr" name="lia-grossestr" value="40">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </td>
+                <td>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="julian-grossestr-hide">
+                        <label class="switch">
+                            <input type="checkbox" id="julian-grossestr" name="julian-grossestr" value="40">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="category">Kniffel</td>
+                <td>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="lia-kniffel-hide">
+                        <label class="switch">
+                            <input type="checkbox" id="lia-kniffel" name="lia-kniffel" value="50">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </td>
+                <td>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="julian-kniffel-hide">
+                        <label class="switch">
+                            <input type="checkbox" id="julian-kniffel" name="julian-kniffel" value="50">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="category">Chance</td>
+                <td>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="lia-chance-hide">
+                        <select id="lia-chance">
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                            <option value="31">31</option>
+                            <option value="32">32</option>
+                            <option value="33">33</option>
+                            <option value="34">34</option>
+                            <option value="35">35</option>
+                            <option value="36">36</option>
+                        </select>
+                    </div>
+                </td>
+                <td>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="julian-chance-hide">
+                        <select id="julian-chance">
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                            <option value="31">31</option>
+                            <option value="32">32</option>
+                            <option value="33">33</option>
+                            <option value="34">34</option>
+                            <option value="35">35</option>
+                            <option value="36">36</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="category">Gesamt Unten</td>
+                <td><span id="lia-gesamt-unten">0</span></td>
+                <td><span id="julian-gesamt-unten">0</span></td>
+            </tr>
+            <tr>
+                <td class="category">Gesamt Oben</td>
+                <td><span id="lia-gesamt-oben-2">0</span></td>
+                <td><span id="julian-gesamt-oben-2">0</span></td>
+            </tr>
+            <tr>
+                <td class="category">Endsumme</td>
+                <td><span id="lia-endsumme">0</span></td>
+                <td><span id="julian-endsumme">0</span></td>
+            </tr>
+        </tbody>
+    </table>
+    <script>
+        // Function to toggle visibility of elements and exclude from calculation
+        function toggleVisibilityAndCalculation(checkbox, element) {
+            checkbox.addEventListener('change', function() {
+                if (this.checked) {
+                    element.style.display = 'none';
+                    element.dataset.ignore = 'true';
+                } else {
+                    element.style.display = 'block';
+                    element.dataset.ignore = 'false';
+                }
+                calculateTotals();
+            });
+        }
+
+        // Function to calculate totals
+        function calculateTotals() {
+            const players = ['lia', 'julian'];
+            const upperCategories = ['1er', '2er', '3er', '4er', '5er', '6er'];
+            const lowerCategories = ['dreierpasch', 'viererpasch', 'fullhouse', 'kleinestr', 'grossestr', 'kniffel', 'chance'];
+            const upperSectionBonus = 63;
+            const upperSectionBonusPoints = 35;
+
+            players.forEach(player => {
+                let upperTotal = 0;
+                let lowerTotal = 0;
+
+                // Calculate upper section total
+                upperCategories.forEach(category => {
+                    const element = document.getElementById(`${player}-${category}`);
+                    if (element.dataset.ignore !== 'true') {
+                        upperTotal += Number(element.value) || 0;
+                    }
+                });
+
+                // Calculate bonus
+                let bonus = upperTotal >= upperSectionBonus ? upperSectionBonusPoints : 0;
+                document.getElementById(`${player}-bonus`).textContent = bonus;
+                document.getElementById(`${player}-gesamt-oben`).textContent = upperTotal + bonus;
+
+                // Calculate lower section total
+                lowerCategories.forEach(category => {
+                    const element = document.getElementById(`${player}-${category}`);
+                    if (element && element.dataset.ignore !== 'true') {
+                        if (category === 'fullhouse' || category === 'kleinestr' || category === 'grossestr' || category === 'kniffel') {
+                            lowerTotal += element.checked ? Number(element.value) : 0;
+                        } else {
+                            lowerTotal += Number(element.value) || 0;
+                        }
+                    }
+                });
+
+                // Set totals
+                document.getElementById(`${player}-gesamt`).textContent = upperTotal;
+                document.getElementById(`${player}-gesamt-unten`).textContent = lowerTotal;
+                document.getElementById(`${player}-gesamt-oben-2`).textContent = upperTotal + bonus;
+                document.getElementById(`${player}-endsumme`).textContent = upperTotal + bonus + lowerTotal;
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add toggle visibility and calculation functionality for each row
+            const rows = [
+                '1er', '2er', '3er', '4er', '5er', '6er', 
+                'dreierpasch', 'viererpasch', 'fullhouse', 'kleinestr', 
+                'grossestr', 'kniffel', 'chance', 'gesamt-unten', 
+                'gesamt-oben-2', 'endsumme'
+            ];
+            rows.forEach(row => {
+                const liaCheckbox = document.getElementById(`lia-${row}-hide`);
+                const julianCheckbox = document.getElementById(`julian-${row}-hide`);
+                const liaElement = document.getElementById(`lia-${row}`);
+                const julianElement = document.getElementById(`julian-${row}`);
+                if (liaCheckbox && liaElement) {
+                    toggleVisibilityAndCalculation(liaCheckbox, liaElement);
+                }
+                if (julianCheckbox && julianElement) {
+                    toggleVisibilityAndCalculation(julianCheckbox, julianElement);
+                }
+            });
+
+            // Calculate totals initially
+            calculateTotals();
+
+            // Recalculate totals on input change
+            document.addEventListener('input', calculateTotals);
+        });
+    </script>
+</body>
+</html>
