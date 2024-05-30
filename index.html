@@ -21,7 +21,7 @@
             border: 1px solid #000;
             text-align: center;
             padding: 2px;
-            width: auto;
+            width: 33.33%;
         }
         .category {
             text-align: left;
@@ -219,6 +219,19 @@
                         `);
                     }
                     table.tBodies[0].appendChild(row);
+                });
+
+                // Add the total, bonus, and other summary rows
+                const summaryRows = [
+                    'Gesamt', 'Bonus', 'Gesamt Oben', 'Gesamt Unten', 'Gesamt Oben', 'Endsumme'
+                ];
+                summaryRows.forEach(row => {
+                    const summaryRow = document.createElement('tr');
+                    summaryRow.innerHTML = `<td class="category">${row}</td>`;
+                    for (let i = 1; i <= playerCount; i++) {
+                        summaryRow.insertAdjacentHTML('beforeend', `<td class="result"><span id="player${i}-${row.toLowerCase().replace(' ', '-')}">0</span></td>`);
+                    }
+                    table.tBodies[0].appendChild(summaryRow);
                 });
 
                 calculateTotals();
