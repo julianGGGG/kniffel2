@@ -714,17 +714,18 @@
     <script>
         // Function to toggle visibility of elements and exclude from calculation
         function toggleVisibilityAndCalculation(checkbox, element) {
-            checkbox.addEventListener('change', function() {
-                if (this.checked) {
-                    element.style.display = 'none';
-                    element.dataset.ignore = 'true';
-                } else {
-                    element.style.display = 'block';
-                    element.dataset.ignore = 'false';
-                }
-                calculateTotals();
-            });
+    checkbox.addEventListener('change', function() {
+        if (this.checked) {
+            element.parentNode.style.display = 'none';
+            element.dataset.ignore = 'true';
+        } else {
+            element.parentNode.style.display = 'block';
+            element.dataset.ignore = 'false';
         }
+        calculateTotals();
+    });
+}
+
 
         // Function to calculate totals
         function calculateTotals() {
