@@ -169,7 +169,7 @@
                         <td>
                             <div class="checkbox-wrapper">
                                 <input type="checkbox" id="player${i}-${category}-hide">
-                                ${category === 'fullhouse' || category === 'kleinestr' || category === 'grossestr' || category === 'kniffel' ? `
+                                ${['fullhouse', 'kleinestr', 'grossestr', 'kniffel'].includes(category) ? `
                                 <label class="switch" style="margin: 0 auto;">
                                     <input type="checkbox" id="player${i}-${category}" value="${category === 'fullhouse' ? 25 : category === 'kleinestr' ? 30 : category === 'grossestr' ? 40 : 50}">
                                     <span class="slider round"></span>
@@ -208,8 +208,10 @@
                 // Re-generate all other rows (except header)
                 const categories = [
                     '1er', '2er', '3er', '4er', '5er', '6er',
+                    'gesamt', 'bonus', 'gesamt-oben',
                     'dreierpasch', 'viererpasch', 'fullhouse', 'kleinestr', 
-                    'grossestr', 'kniffel', 'chance'
+                    'grossestr', 'kniffel', 'chance',
+                    'gesamt-unten', 'gesamt-oben-2', 'endsumme'
                 ];
                 
                 // Clear existing rows
@@ -220,19 +222,6 @@
                 // Add rows for each category
                 categories.forEach(category => {
                     table.tBodies[0].insertAdjacentHTML('beforeend', createRow(category));
-                });
-
-                // Add the total, bonus, and other summary rows
-                const summaryRows = [
-                    'Gesamt', 'Bonus', 'Gesamt Oben', 'Gesamt Unten', 'Gesamt Oben', 'Endsumme'
-                ];
-                summaryRows.forEach(row => {
-                    let summaryRow = `<tr><td class="category">${row}</td>`;
-                    for (let i = 1; i <= playerCount; i++) {
-                        summaryRow += `<td class="result"><span id="player${i}-${row.toLowerCase().replace(' ', '-')}">0</span></td>`;
-                    }
-                    summaryRow += `</tr>`;
-                    table.tBodies[0].insertAdjacentHTML('beforeend', summaryRow);
                 });
 
                 // Add toggle visibility functionality
@@ -296,7 +285,7 @@
                     lowerCategories.forEach(category => {
                         const element = document.getElementById(`${player}-${category}`);
                         if (element && element.dataset.ignore !== 'true') {
-                            if (category === 'fullhouse' || category === 'kleinestr' || category === 'grossestr' || category === 'kniffel') {
+                            if (['fullhouse', 'kleinestr', 'grossestr', 'kniffel'].includes(category)) {
                                 lowerTotal += element.checked ? Number(element.value) : 0;
                             } else {
                                 lowerTotal += Number(element.value) || 0;
