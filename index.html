@@ -181,7 +181,6 @@
                             <option value="6">6</option>
                             <option value="8">8</option>
                             <option value="10">10</option>
-
                         </select>
                     </div>
                 </td>
@@ -195,7 +194,6 @@
                             <option value="6">6</option>
                             <option value="8">8</option>
                             <option value="10">10</option>
-
                         </select>
                     </div>
                 </td>
@@ -212,7 +210,6 @@
                             <option value="9">9</option>
                             <option value="12">12</option>
                             <option value="15">15</option>
-
                         </select>
                     </div>
                 </td>
@@ -226,7 +223,6 @@
                             <option value="9">9</option>
                             <option value="12">12</option>
                             <option value="15">15</option>
-            
                         </select>
                     </div>
                 </td>
@@ -243,7 +239,6 @@
                             <option value="12">12</option>
                             <option value="16">16</option>
                             <option value="20">20</option>
-                     
                         </select>
                     </div>
                 </td>
@@ -257,7 +252,6 @@
                             <option value="12">12</option>
                             <option value="16">16</option>
                             <option value="20">20</option>
-     
                         </select>
                     </div>
                 </td>
@@ -274,7 +268,6 @@
                             <option value="15">15</option>
                             <option value="20">20</option>
                             <option value="25">25</option>
-
                         </select>
                     </div>
                 </td>
@@ -288,7 +281,6 @@
                             <option value="15">15</option>
                             <option value="20">20</option>
                             <option value="25">25</option>
-            
                         </select>
                     </div>
                 </td>
@@ -305,7 +297,6 @@
                             <option value="18">18</option>
                             <option value="24">24</option>
                             <option value="30">30</option>
-           
                         </select>
                     </div>
                 </td>
@@ -319,7 +310,6 @@
                             <option value="18">18</option>
                             <option value="24">24</option>
                             <option value="30">30</option>
-                  
                         </select>
                     </div>
                 </td>
@@ -331,8 +321,14 @@
             </tr>
             <tr>
                 <td class="category">Bonus</td>
-                <td class="result"><span id="lia-bonus">0</span></td>
-                <td class="result"><span id="julian-bonus">0</span></td>
+                <td class="result">
+                    <span id="lia-bonus">0</span>
+                    <span id="lia-bonus-diff" style="font-weight: normal;"></span>
+                </td>
+                <td class="result">
+                    <span id="julian-bonus">0</span>
+                    <span id="julian-bonus-diff" style="font-weight: normal;"></span>
+                </td>
             </tr>
             <tr>
                 <td class="category">Gesamt Oben</td>
@@ -481,7 +477,7 @@
                     </div>
                 </td>
             </tr>
-           <tr>
+            <tr>
                 <td class="category">Full House</td>
                 <td>
                     <div class="checkbox-wrapper">
@@ -571,7 +567,7 @@
                     <div class="checkbox-wrapper">
                         <input type="checkbox" id="lia-chance-hide">
                         <select id="lia-chance">
-                             <option value="0">0</option>
+                            <option value="0">0</option>
                             <option value="5">5</option>
                             <option value="6">6</option>
                             <option value="7">7</option>
@@ -690,7 +686,10 @@
 
                 // Calculate bonus
                 let bonus = upperTotal >= upperSectionBonus ? upperSectionBonusPoints : 0;
+                let bonusDiff = upperTotal >= upperSectionBonus ? 0 : upperSectionBonus - upperTotal;
+
                 document.getElementById(`${player}-bonus`).textContent = bonus;
+                document.getElementById(`${player}-bonus-diff`).textContent = bonusDiff ? ` (${bonusDiff})` : '';
                 document.getElementById(`${player}-gesamt-oben`).textContent = upperTotal + bonus;
 
                 // Calculate lower section total
@@ -739,6 +738,12 @@
 
             // Recalculate totals on input change
             document.addEventListener('input', calculateTotals);
+        });
+
+        // Warn the user before leaving the page
+        window.addEventListener('beforeunload', function (e) {
+            e.preventDefault();
+            e.returnValue = 'Sind Sie sicher, dass Sie die Seite verlassen möchten? Nicht gespeicherte Daten gehen verloren!';
         });
     </script>
 </body>
